@@ -127,7 +127,7 @@ CartImplementation.prototype.amount = function(){
   this._collections.dep.depend();
   var amount = 0;
   this.collection.find().forEach(function(item){
-    amount += item.doc().amount;
+    amount += item.doc().amount * item.quantity;
   });
   return amount;
 };
