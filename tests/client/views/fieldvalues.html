@@ -1,0 +1,41 @@
+<template name="demo">
+  <div class="col-md-12">
+    <h1>Cart</h1>
+    Total: {{cartTotal}}<br>
+    Num Items: {{cartNumItems}}<br>
+    Items:
+    {{#each cartItems}}
+      {{> cartItem}}
+    {{/each}}
+  </div>
+
+  <br>
+  <br>
+  Items
+  <br>
+  <br>
+  
+  {{#each items}}
+    {{> item}}
+  {{/each}}
+</template>
+
+<template name="cartItem">
+  <div class="col-md-4">
+    {{doc.name}}<br>
+    {{quantity}}<br>
+    <div class="btn btn-primary" name="remove">
+      Remove
+    </div>
+  </div>
+</template>
+
+<template name="item">
+  <div class="col-md-4 well">
+    {{name}}<br>
+    {{amount}}<br>
+    <div class="btn btn-primary" name="addToCart">
+      Add to Cart
+    </div>
+  </div>
+</template>
