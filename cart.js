@@ -46,7 +46,7 @@ var allowDeny = {
 
 var helpers = {
   doc: function(){
-    return (eval( this.relationType )).findOne( this.relationId );
+    return Cart._getItemDoc( this.relationType, this.relationId );
   }
 };
 
@@ -55,6 +55,8 @@ var helpers = {
  */
 CartImplementation = function(){
   this._collections = {};
+  
+  this._config = {};
   
   this._collections.user = new Meteor.Collection('cartItems');  
   this._collections.user.attachSchema( cartItemSchema );
@@ -134,16 +136,28 @@ CartImplementation.prototype.amount = function(){
 
 CartImplementation.prototype._onLoginHook = function(user){
   console.log( "Login hook called" );
+  var self = this;
   Meteor.setTimeout(function(){
-    Cart._mergeCarts();
-    Cart._changeToRemote();
-    Cart._subscription = Meteor.subscribe('Cart');
+    self._mergeCarts();
+    self._changeToRemote();
+    self._subscription = Meteor.subscribe('Cart');
   },300); 
 };
 
 CartImplementation.prototype._onLogoutHook = function(user){
-  Cart._changeToLocal();
-  Cart._subscription.stop();
+  this._changeToLocal();
+  this._subscription.stop();
+};
+
+/*
+ * Setup profiles
+ */
+CartImplementation.prototype.configure = function(config){
+  this._config = _.extend(this._config, config);
+};
+
+CartImplementation.prototype._getItemDoc = function(type,id){
+  return this._config[type].collection.findOne({'_id': id});
 };
 
 Cart = new CartImplementation();
