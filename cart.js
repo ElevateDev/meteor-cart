@@ -69,6 +69,11 @@ CartImplementation = function(){
     this._collections.local.helpers( helpers );
     this._collections.dep = new Deps.Dependency();
     this._changeToLocal();
+   
+    var self = this;
+    // On login merge carts and save to server, also switch local collections used
+    Accounts.onLogin( function(){ self._onLoginHook(); } );
+    Accounts.onLogout( function(){ self._onLogoutHook(); } );
   }
 };
 
@@ -122,7 +127,12 @@ CartImplementation.prototype.items = function(){
 
 CartImplementation.prototype.numItems = function(){
   this._collections.dep.depend();
-  return this.collection.find().count();
+
+  var num = 0;
+  this.collection.find().forEach(function(item){
+    num += item.quantity;
+  });
+  return num;
 };
 
 CartImplementation.prototype.amount = function(){
@@ -161,13 +171,6 @@ CartImplementation.prototype._getItemDoc = function(type,id){
 };
 
 Cart = new CartImplementation();
-
-if( Meteor.isClient ){
-  // On login merge carts and save to server, also switch local collections used
-  Accounts.onLogin( Cart._onLoginHook );
-
-  Accounts.onLogout( Cart._onLogoutHook );
-}
 
 if( Meteor.isServer ){
   Meteor.publish('Cart', function(){
