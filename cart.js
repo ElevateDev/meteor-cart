@@ -139,17 +139,15 @@ CartImplementation.prototype.amount = function(){
   this._collections.dep.depend();
   var amount = 0;
   this.collection.find().forEach(function(item){
-    var amount = (typeof( item.doc().amount ) === "number") ?
+    var itemAmount = (typeof( item.doc().amount ) === "number") ?
       item.doc().amount :
       item.doc().amount();
-
-    amount += amount * item.quantity;
+    amount += itemAmount * item.quantity;
   });
   return amount;
 };
 
 CartImplementation.prototype._onLoginHook = function(user){
-  console.log( "Login hook called" );
   var self = this;
   Meteor.setTimeout(function(){
     self._mergeCarts();
