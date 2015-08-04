@@ -139,7 +139,11 @@ CartImplementation.prototype.amount = function(){
   this._collections.dep.depend();
   var amount = 0;
   this.collection.find().forEach(function(item){
-    amount += item.doc().amount * item.quantity;
+    var amount = (typeof( item.doc().amount ) === "number") ?
+      item.doc().amount :
+      item.doc().amount();
+
+    amount += amount * item.quantity;
   });
   return amount;
 };
