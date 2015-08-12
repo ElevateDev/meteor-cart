@@ -25,6 +25,9 @@ Provides a cart for meteor.  Does not include a payment system, or ui.
 ## Remove
     Cart.remove( this._id ); // Id of the cart item, _not_ the id of the object
 
+## Empty
+    Cart.empty( ); // Remove all items in cart.
+
 ## Info
 Number of items in cart.
 

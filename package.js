@@ -1,6 +1,6 @@
 Package.describe({
     name: "elevatedevdesign:cart",
-    summary: "A simple and pluggable shopping cart.",
+    summary: "A simple shopping cart.",
   	version: "0.0.2-rc.1",
     git: "https://github.com/ElevateDev/meteor-cart.git"
 });

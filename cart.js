@@ -118,6 +118,13 @@ CartImplementation.prototype.remove = function( id ){
   this.collection.remove( {'_id': id} );
 };
 
+CartImplementation.prototype.empty = function( ){
+  var self = this;
+  self.collection.find().forEach( function(doc){
+    self.remove( doc._id );
+  });
+};
+
 // Calculate total
 
 CartImplementation.prototype.items = function(){
