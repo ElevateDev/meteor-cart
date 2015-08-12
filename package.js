@@ -10,11 +10,13 @@ Package.on_use(function (api) {
 
   api.use([
     'aldeed:simple-schema@1.3.3',
-    'underscore',
-    'accounts-base',
+    'aldeed:collection2@2.3.3',
+    'dburles:collection-helpers@1.0.3',
     'peppelg:on-login-logout@1.0.0',
+    'accounts-base',
     'deps',
-    'dburles:collection-helpers@1.0.3'
+    'mongo',
+    'underscore',
   ]);
 
 	api.use([
@@ -25,4 +27,17 @@ Package.on_use(function (api) {
 	api.add_files('cart.js',['client','server']);
 
   api.export('Cart', ['client','server']);
+});
+
+Package.onTest(function(api) {
+  api.use('sanjo:jasmine@0.17.0');
+  api.use('velocity:core');
+  api.use('velocity:html-reporter@0.6.2');
+  api.use('pstuart2:velocity-notify@0.0.5');
+  api.use('elevatedevdesign:cart');
+  api.use('mongo');
+  api.use('accounts-password');
+
+  api.addFiles(['tests/lib-fixtures.js'], ['client','server']);
+  api.addFiles(['tests/cart-spec.js'], 'client');
 });
