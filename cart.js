@@ -108,7 +108,7 @@ CartImplementation.prototype._changeToRemote = function(){
 CartImplementation.prototype.add = function(item){
   var existItem = this.collection.findOne( _.pick( item, ['relationId','relationType'] ) );
   if( existItem ){
-    this.collection.update( {'_id': existItem._id},{$inc: {quantity: 1 }} );
+    this.collection.update( {'_id': existItem._id},{$inc: {quantity: item.quantity }} );
   }else{
     this.collection.insert( item );
   }
