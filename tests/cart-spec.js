@@ -1,11 +1,3 @@
-var ValidCartItem = function(){
-  return {
-    relationType: "Items",
-    relationId: "12345666565",
-    quantity: 1
-  };
-};
-
 Cart.configure({
   Items: {
     collection: Items
@@ -28,7 +20,9 @@ describe("Cart", function(){
 
       Cart.add( expected );
       expect( Cart.numItems() ).toBe( 1 );
-      expect( _.omit(Cart.items().fetch()[0],'doc') ).toEqual( expected );
+      expect( 
+        OmitHelpers( Cart.items().fetch()[0] )
+      ).toEqual( expected );
     });
     
     it("should increment an item by quantity if it is already in cart",function(){
@@ -37,7 +31,9 @@ describe("Cart", function(){
       Cart.add( _.extend(expected,{quantity: 1}));
       Cart.add( _.extend(expected,{quantity: 10}));
       expect( Cart.numItems() ).toBe( 11 );
-      expect( _.omit(Cart.items().fetch()[0],'doc') ).toEqual( _.extend(expected,{quantity: 11}) );
+      expect( 
+        OmitHelpers( Cart.items().fetch()[0] )
+      ).toEqual( _.extend(expected,{quantity: 11}) );
     });
   });
    
@@ -77,28 +73,6 @@ describe("Cart", function(){
       }));
 
       expect( Cart.amount() ).toBe( 1501 );
-    });
-  });
-
-  /*
-   * Check the login/logout hook's are working properly
-   */
-  describe('on login',function(){
-    beforeEach(function(){
-    });
-
-    it("should remove all from local", function(){
-    });
-
-    it("should add existing items to remote collection", function(){
-    });
-
-    it("should change default collection to remote", function(){
-    });
-  });
-
-  describe("on logout",function(){
-    it("should set default collection to local",function(){
     });
   });
 });

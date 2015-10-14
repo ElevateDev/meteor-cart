@@ -40,4 +40,5 @@ Package.onTest(function(api) {
 
   api.addFiles(['tests/lib-fixtures.js'], ['client','server']);
   api.addFiles(['tests/cart-spec.js'], 'client');
+  api.addFiles(['tests/server/cart-spec.js'], 'server');
 });
