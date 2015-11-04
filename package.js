@@ -1,8 +1,8 @@
 Package.describe({
-    name: "elevatedevdesign:cart",
+    name: "jimmiebtlr:cart",
     summary: "A simple shopping cart.",
   	version: "0.0.2-rc.1",
-    git: "https://github.com/ElevateDev/meteor-cart.git"
+    git: "https://github.com/jimmiebtlr/meteor-cart.git"
 });
 
 Package.on_use(function (api) {
@@ -23,7 +23,7 @@ Package.on_use(function (api) {
     'ground:db@0.3.10',
 	],
 	'client');
-	
+
 	api.add_files('cart.js',['client','server']);
 
   api.export('Cart', ['client','server']);
