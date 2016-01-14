@@ -1,7 +1,7 @@
 Package.describe({
     name: "jimmiebtlr:cart",
     summary: "A simple shopping cart.",
-  	version: "0.0.2-rc.2",
+  	version: "0.0.1",
     git: "https://github.com/jimmiebtlr/meteor-cart.git"
 });
 
